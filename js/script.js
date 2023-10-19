@@ -41,15 +41,14 @@ function squareGen() {
         square.style.height = `calc(100% / ${Math.sqrt(squareNumber)})`;
         wrapper.append(square);
         square.innerHTML = (a);
-        
+
         square.addEventListener('click', function squareClick(){
             if(gameOver === false){
                 square.removeEventListener('click', squareClick);
                 if(bombGenVar.includes(parseInt(a))){
-                    square.classList.add('bg-bomb');
-                    square.innerHTML = `<i class="fa-solid fa-bomb fa-beat fa-lg" style="color: #000000;"></i>`;
                     result.innerHTML = `Hai perso, il tuo punteggio è: ${score}`;
                     gameOver = true;
+                    bombPrint(bombGenVar);
                 } else {
                     square.classList.add('bg-sky', 'text-white');
                     console.log(this.innerText);
@@ -62,8 +61,20 @@ function squareGen() {
             
         })
         
-    }
+    } 
 
+}
+
+function bombPrint(bombGenVar){
+
+    const bombsArray = document.getElementsByClassName('square');
+    
+    for(let a = 1; a <= bombsArray.length; a++){
+        if(bombGenVar.includes(parseInt(bombsArray[a].innerHTML))){
+            bombsArray[a].classList.add('bg-bomb');
+            bombsArray[a].innerHTML = `<i class="fa-solid fa-bomb fa-beat fa-lg" style="color: #000000;"></i>`;
+        }
+    }
 }
 
 function bombGen(squareNumber){

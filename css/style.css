@@ -37,6 +37,12 @@ button {
     top: 0;
     right: 30px;
 }
+#result {
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 5px;
+}
 
 /* colors */
 
