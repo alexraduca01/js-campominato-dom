@@ -18,16 +18,21 @@ function getRndInteger(min, max) {
 
 function squareGen() {
 
-    
-
     wrapper.classList.remove('d-none');
     returnButton.classList.remove('d-none');
     btn.classList.add('d-none');
     select.classList.add('d-none');
+
+    let gameOver = false;
     
     const squareNumber = parseInt(document.querySelector('select').value);
+    let maxScore = squareNumber - 16;
+    console.log(maxScore);
     
-    bombGen(squareNumber);
+
+    let bombGenVar = bombGen(squareNumber);
+    let score = 0;
+    let result = document.getElementById('result');
     
     for(let a = 1; a <= squareNumber; a++){
         const square = document.createElement('div');
@@ -38,13 +43,26 @@ function squareGen() {
         square.innerHTML = (a);
         
         square.addEventListener('click', function squareClick(){
-            square.classList.add('bg-sky', 'text-white');
-            console.log(this.innerText);
-            square.removeEventListener('click', squareClick);
+            if(gameOver === false){
+                square.removeEventListener('click', squareClick);
+                if(bombGenVar.includes(parseInt(a))){
+                    square.classList.add('bg-bomb');
+                    square.innerHTML = `<i class="fa-solid fa-bomb fa-beat fa-lg" style="color: #000000;"></i>`;
+                    result.innerHTML = `Hai perso, il tuo punteggio è: ${score}`;
+                    gameOver = true;
+                } else {
+                    square.classList.add('bg-sky', 'text-white');
+                    console.log(this.innerText);
+                    score++;
+                    result.innerHTML = `il tuo punteggio è: ${score}`;
+                }
+            } else {
+                square.removeEventListener('click', squareClick);
+            }
+            
         })
+        
     }
-
-    
 
 }
 

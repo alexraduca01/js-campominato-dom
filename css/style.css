@@ -46,3 +46,6 @@ button {
 .txt-xanthous {
     color: var(--xanthous);
 }
+.bg-bomb {
+    background-color: var(--chili-red);
+}
