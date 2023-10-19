@@ -12,16 +12,23 @@
 // - con difficoltà 2 => 81 caselle, con un numero compreso tra 1 e 81, divise in 9 caselle per 9 righe;
 // - con difficoltà 3 => 49 caselle, con un numero compreso tra 1 e 49, divise in 7 caselle per 7 righe;
 
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min) ) + min;
+}
+
 function squareGen() {
+
+    
 
     wrapper.classList.remove('d-none');
     returnButton.classList.remove('d-none');
     btn.classList.add('d-none');
     select.classList.add('d-none');
     
-
     const squareNumber = parseInt(document.querySelector('select').value);
-
+    
+    bombGen(squareNumber);
+    
     for(let a = 1; a <= squareNumber; a++){
         const square = document.createElement('div');
         square.classList.add('square', 'd-flex', 'justify-content-center', 'align-items-center');
@@ -30,12 +37,35 @@ function squareGen() {
         wrapper.append(square);
         square.innerHTML = (a);
         
-        square.addEventListener('click', function(){
+        square.addEventListener('click', function squareClick(){
             square.classList.add('bg-sky', 'text-white');
             console.log(this.innerText);
+            square.removeEventListener('click', squareClick);
         })
     }
 
+    
+
+}
+
+function bombGen(squareNumber){
+        
+    let bombs = [];
+    const bombAmount = 16;
+
+    while(bombs.length < bombAmount){
+
+        let rndNumbers = getRndInteger(1, squareNumber); 
+
+        if(!bombs.includes(rndNumbers)){
+            bombs.push(rndNumbers);
+        }
+            
+    }
+
+    console.log(bombs);
+    return bombs;
+    
 }
 
 const returnButton = document.getElementById('return-button');
