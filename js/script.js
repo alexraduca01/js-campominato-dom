@@ -12,9 +12,6 @@
 // - con difficoltà 2 => 81 caselle, con un numero compreso tra 1 e 81, divise in 9 caselle per 9 righe;
 // - con difficoltà 3 => 49 caselle, con un numero compreso tra 1 e 49, divise in 7 caselle per 7 righe;
 
-function getRndInteger(min, max) {
-    return Math.floor(Math.random() * (max - min) ) + min;
-}
 
 function squareGen() {
 
@@ -65,11 +62,15 @@ function squareGen() {
 
 }
 
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min) ) + min;
+}
+
 function bombPrint(bombGenVar){
 
-    const bombsArray = document.getElementsByClassName('square');
+    bombsArray = document.getElementsByClassName('square');
     
-    for(let a = 1; a <= bombsArray.length; a++){
+    for(let a = 0; a <= bombsArray.length; a++){
         if(bombGenVar.includes(parseInt(bombsArray[a].innerHTML))){
             bombsArray[a].classList.add('bg-bomb');
             bombsArray[a].innerHTML = `<i class="fa-solid fa-bomb fa-beat fa-lg" style="color: #000000;"></i>`;
@@ -97,6 +98,7 @@ function bombGen(squareNumber){
     
 }
 
+let bombsArray = [];
 const returnButton = document.getElementById('return-button');
 const select = document.querySelector('select');
 const btn = document.querySelector('button');
