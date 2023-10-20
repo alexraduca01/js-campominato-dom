@@ -51,10 +51,16 @@ function squareGen() {
                     console.log(this.innerText);
                     score++;
                     result.innerHTML = `il tuo punteggio è: ${score}`;
+                    if(score === maxScore){
+                        result.innerHTML = `Hai vinto ! Il tuo punteggio è: ${score}`;
+                        gameOver = true;
+                    }
                 }
             } else {
                 square.removeEventListener('click', squareClick);
             }
+
+            
             
         })
         
